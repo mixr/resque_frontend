@@ -4,11 +4,13 @@
 
 require 'logger'
 require 'resque/server'
+require 'yaml'
 
 use Rack::ShowExceptions
 
 # you can configure the db as a third parameter
-Resque.redis = "localhost:6379:0" # don't know how to start workers for db 8 yet, so use 0 until then
+password = YAML::load(File.open("redis.yml"))["production"]["password"]
+Resque.redis = "redis://:#{password}@localhost:6379/8"
 Resque.redis.namespace = "resque" # should be the default
 
 run Rack::URLMap.new \

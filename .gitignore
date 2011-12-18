@@ -3,6 +3,7 @@
 .loadpath
 *~
 *.diff
+redis.yml
 config/database.*
 config/config.yml
 config/environments/development.rb
